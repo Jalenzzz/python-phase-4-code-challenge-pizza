@@ -14,11 +14,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 
 migrate = Migrate(app, db)
-
 db.init_app(app)
-
 api = Api(app)
-
 
 @app.route("/")
 def index():
@@ -38,7 +35,7 @@ class RestaurantDetails(Resource):
             if restaurant:
                 return restaurant.to_dict(), 200
             return {"error": "Restaurant not found"}, 404
-
+    
     def delete(self, id):
         with db.session() as session:
             restaurant = session.get(Restaurant, id)
